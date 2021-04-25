@@ -15,7 +15,6 @@ class PostCard extends React.Component {
   toggleFavourite(isSelected) {
     console.log(`toggle FAVOURITE on post ${this.props.ID}`);
     console.log(`new value ${isSelected}`);
-    // code can be added here to update the API with new liked status
   }
 
   render() {
@@ -27,7 +26,7 @@ class PostCard extends React.Component {
         hoverable={true}
         actions={[
           <PostIcon type="favourite" countLink={this.props.links.favourites} selected={this.props.favourited}
-              handleToggle={this.toggleLike} id={postID}/>,
+              handleToggle={this.toggleFavourite} id={postID}/>,
         ]}>
         
         <Meta dogName={this.props.dogName} description={this.props.summary} />

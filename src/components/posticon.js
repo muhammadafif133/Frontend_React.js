@@ -52,6 +52,7 @@ class PostIcon extends React.Component {
   }
   
   componentDidMount() {
+    if (!this.props.countLink) return;  // prevent fetch on parent mount
     fetch(this.props.countLink)
     .then(status)
     .then(json)

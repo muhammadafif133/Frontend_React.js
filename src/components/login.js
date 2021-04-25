@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { status, json } from '../utilities/requestHandlers';
 import UserContext from '../contexts/user';
+import { Redirect } from 'react-router-dom';
 
 // add some layout to keep the form organised on different screen sizes
 const formItemLayout = {
@@ -30,13 +31,14 @@ class LoginForm extends React.Component {
         super(props);
         this.login = this.login.bind(this);
     }
-
+    
+    state = {redirect: null}
     static contextType = UserContext;
 
     login(values) {
         const {username, password} = values;
         console.log(`logging in user: ${username}`)
-        fetch('http://localhost:3000/api/v1/users/login', {
+        fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users/login', {
             method: "POST",
             headers: {
                 "Authorization": "Basic " + btoa(username + ":" + password)
@@ -47,7 +49,9 @@ class LoginForm extends React.Component {
         .then(user => {
             console.log('Logged in successfully');
             console.log(user);
+            user.password = password;  // store in context for future API calls
             this.context.login(user);
+            this.setState({redirect:'/'});
         })
         .catch(error => {
             console.log('Login failed');
