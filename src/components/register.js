@@ -50,7 +50,7 @@ class RegistrationForm extends React.Component {
   onFinish = (values) => {
     console.log('Received values of form: ', values);
     const { confirm, ...data } = values;  // ignore the 'confirm' value in data sent
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

@@ -13,7 +13,7 @@ class BlogGrid extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/listings')
+    fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/listings')
     .then(status)
     .then(json)
     .then(data => {

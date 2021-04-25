@@ -19,7 +19,7 @@ class Post extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id; // available using withRouter()
 
-    fetch(`http://localhost:3000/api/v1/listings/${id}`)
+    fetch(`https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/listings/${id}`)
     .then(status)
     .then(json)
     .then(post => {
@@ -40,7 +40,6 @@ class Post extends React.Component {
       return <h3>Loading post...</h3>
     }
     const post = this.state.post;
-
     const icons = (
       <div>
         Favourites : <PostIcon type="favourite" count={post.favourites} selected={post.favourited}
