@@ -1,17 +1,75 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { Image, Row, Col, Typography } from 'antd'
+import PostIcon from './posticon';
 
+const { Title, Paragraph } = Typography;
 
-function Post(props) {
-  
-  let { id } = useParams();
-  
-  return (
-    <>
-      <h1>Post ID: {id}</h1>
-      <p>This is where individual article posts can be displayed</p>
-    </>
-  );
+class Post extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      post: undefined
+    }
+    this.toggleLike = this.toggleLike.bind(this);
+    this.togglePinned = this.togglePinned.bind(this);
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id; // available using withRouter()
+    this.setState({
+      post: require('../data/posts.json')[id]  
+    })
+  }
+
+  toggleLike(isSelected) {
+    // Implement same functionality as in <PostCard>
+    // To avoid repetition (DRY principle) the handler for this
+    // and for <PostCard> should be defined in a single place
+    // and imported into both components.
+    console.log('like was toggled');
+  }
+
+  togglePinned(isSelected) {
+    // Implement same functionality as in <PostCard>
+    // To avoid repetition (DRY principle) the handler for this
+    // and for <PostCard> should be defined in a single place
+    // and imported into both components.
+    console.log('pin was toggled');
+  }
+
+  render() {
+    if (!this.state.post) {
+      return <h3>Loading post...</h3>
+    }
+    const post = this.state.post;
+
+    const icons = (
+      <div>
+        Likes : <PostIcon type="like" count={post.likes} selected={post.liked}
+          handleToggle={this.toggleLike}/><br/>
+      </div>
+    );
+
+    return (
+      <div>
+        <Row type="flex" justify="space-around" align="middle">
+          <Col span={6} align="center">
+            <Image width={200} alt="Post" src={post.imagegURL} />
+          </Col>
+          <Col span={12}>
+            <Title>{post.title}</Title>
+            <Paragraph>{post.allText}</Paragraph>
+          </Col>
+          <Col span={6} align="center">
+            {icons}
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+
 }
 
-export default Post;
+export default withRouter(Post);
