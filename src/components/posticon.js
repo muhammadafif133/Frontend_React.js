@@ -1,13 +1,13 @@
 import React from 'react';
 
-import LikeOutlined from '@ant-design/icons/LikeOutlined';
-import LikeFilled from '@ant-design/icons/LikeFilled';
+import StarOutlined from '@ant-design/icons/StarOutlined';
+import StarFilled from '@ant-design/icons/StarFilled';
 
 import { status, json } from '../utilities/requestHandlers';
 
 /**
  * @typedef {"filled" | "outlined"} theme
- * @typedef {"like" } iconType
+ * @typedef {"star" } iconType
  */
          
 /**
@@ -21,15 +21,14 @@ function getIcon (theme, iconType) {
   let Icon;
 
   if (theme === 'filled') {
-    if (iconType === 'like') {
-      Icon = LikeFilled
+    if (iconType === 'star') {
+      Icon = StarFilled
     } 
   } else if (theme === 'outlined') {
-    if (iconType === 'like') {
-      Icon = LikeOutlined
+    if (iconType === 'star') {
+      Icon = StarOutlined
     }       
   }
-
   return Icon;
 }
   

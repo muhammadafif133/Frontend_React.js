@@ -9,12 +9,11 @@ class PostCard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.toggleLike = this.toggleLike.bind(this);
-    this.togglePinned = this.togglePinned.bind(this);
+    this.toggleFavourite = this.toggleFavourite.bind(this);
   }
 
-  toggleLike(isSelected) {
-    console.log(`toggle LIKE on post ${this.props.ID}`);
+  toggleFavourite(isSelected) {
+    console.log(`toggle FAVOURITE on post ${this.props.ID}`);
     console.log(`new value ${isSelected}`);
     // code can be added here to update the API with new liked status
   }
@@ -27,7 +26,7 @@ class PostCard extends React.Component {
         cover={<NavImage alt={`Post ${postID}`} src={this.props.imageURL} to={`/post/${postID}`} />}
         hoverable={true}
         actions={[
-          <PostIcon type="favourites" countLink={this.props.links.favourites} selected={this.props.favourited}
+          <PostIcon type="favourite" countLink={this.props.links.favourites} selected={this.props.favourited}
               handleToggle={this.toggleLike} id={postID}/>,
         ]}>
         
