@@ -1,49 +1,79 @@
-import { Card, Row, Col } from 'antd';
-const { Meta } = Card;
+import React from 'react';
 
-const grid = (
-  <>
-  <Row type="flex" justify="space-around">
-    <Col span={6}>
-      <Link to="/post/1">
-        <Card cover={<img alt="test" src="https://picsum.photos/id/1024/400"/>}>
-          <Meta title="First Post" description="This is about something" />
-        </Card>
-      </Link>
-    </Col>
-    <Col span={6}>
-      <Card cover={<img alt="test" src="https://picsum.photos/id/1025/400"/>}>
-        <Meta title="Second Post" description="This is about something" />
-      </Card>
-    </Col>
-    <Col span={6}>
-      <Card cover={<img alt="test" src="https://picsum.photos/id/1026/400"/>}>
-        <Meta title="Third Post" description="This is about something" />
-      </Card>
-    </Col>
-  </Row>  
-  <Row type="flex" justify="space-around">
-    <Col span={6}>
-      <Card cover={<img alt="test" src="https://picsum.photos/id/1027/400"/>}>
-        <Meta title="Fourth Post" description="This is about something" />
-      </Card>
-    </Col>
-    <Col span={6}>
-      <Card cover={<img alt="test" src="https://picsum.photos/id/1028/400"/>}>
-        <Meta title="Fifth Post" description="This is about something" />
-      </Card>
-    </Col>
-    <Col span={6}>
-      <Card cover={<img alt="test" src="https://picsum.photos/id/1029/400"/>}>
-        <Meta title="Sixth Post" description="This is about something" />
-      </Card>
-    </Col>
-  </Row>  
-  </>
-);
+import LikeOutlined from '@ant-design/icons/LikeOutlined';
+import LikeFilled from '@ant-design/icons/LikeFilled';
 
-function PostGrid(props) {
-  return grid;
+/**
+ * @typedef {"filled" | "outlined"} theme
+ * @typedef {"like"} iconType
+ */
+         
+/**
+ * Determine the icon to be displayed
+ * 
+ * @param {theme} theme - design of icon
+ * @param {iconType} iconType - icon to show
+ * @returns {Object} - the correct Ant Design icon component
+ */
+function getIcon (theme, iconType) {
+  let Icon;
+
+  if (theme === 'filled') {
+    if (iconType === 'like') {
+      Icon = LikeFilled
+    } 
+  } else if (theme === 'outlined') {
+    if (iconType === 'like') {
+      Icon = LikeOutlined
+    }  }      
+  }
+
+  return Icon;
+}
+  
+class PostIcon extends React.Component {
+  constructor(props){  
+    super(props);  
+    this.state = {
+      selected: props.selected
+    };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(){
+    if (this.props.viewOnly) {
+      console.log('This icon is view only: preventing update');
+      return;
+    }
+    //reverse the selected state with every click
+    this.setState({selected: !this.state.selected});
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.selected !== this.state.selected) {
+      //run the handler passed in by the parent component
+      this.props.handleToggle(this.state.selected);
+    }
+  }
+
+  render(){
+    const theme = this.state.selected ? 'filled' : 'outlined';
+    const iconType = this.props.type;
+    const Icon = getIcon(theme, iconType);
+
+    //return a span that contains the desired icon
+    //and a space then the counter
+    //if the icon is clicked we will run onClick handler
+    
+    return (
+      <span>
+        <Icon
+          onClick={this.onClick}
+          style={{color:'steelblue'}} />
+        {this.props.count}
+      </span>
+    );
+  }
 }
 
-export default PostGrid;
+export default PostIcon;

@@ -1,11 +1,12 @@
+import React from 'react';
 import { PageHeader, Input } from 'antd';
-import PostGrid from './postgrid';
+import BlogGrid from './bloggrid';
 
 const { Search } = Input;
 
 function Home(props) {
+  
   return (
-    <>
       <div className="site-layout-content">
         <div style={{ padding: '2% 20%' }}>
           <Search placeholder="input search text"
@@ -14,12 +15,11 @@ function Home(props) {
             size="large"
             onSearch={null}/>
           <PageHeader className="site-page-header"
-            title="Web API Development Blog"
-            subTitle="Welcome to the demo blog."/>
+            title="Welcome to Canine Dogs Shelter"
+            subTitle="Where dogs are preserved"/>
         </div>  
-        <PostGrid />
+        <BlogGrid />
       </div>
-    </>  
   );
 }
 

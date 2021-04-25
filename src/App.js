@@ -5,33 +5,35 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import './App.css';
 
 import Nav from './components/nav';
 import Account from './components/account';
 import Home from './components/home';
 import Post from './components/post';
+import Register from './components/register';
 
 const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
-    <Layout className="layout">
-      
+    <Router>
       <Header>
         <Nav />
       </Header>
-      
+
       <Content>
         <Switch>
           <Route path="/account" children={<Account />} />
+          <Route path="/register" children={<Register />} />
           <Route path="/post/:id" children={<Post />} />
-          <Route path="/" children={<Home />} />
+          <Route path="/" children={<Home />} exact />
         </Switch>
       </Content>
 
-      <Footer style={{ textAlign: 'center' }}>Created for Web API Development</Footer>
+      <Footer style={{ textAlign: 'center' }}>Created for Canine Dogs Shelter</Footer>
 
-    </Layout>
+    </Router>
   );
 }
 
