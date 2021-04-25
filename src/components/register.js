@@ -55,7 +55,7 @@ class RegistrationForm extends React.Component {
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json"
-        }        
+        }
     })
     .then(status)
     .then(json)
