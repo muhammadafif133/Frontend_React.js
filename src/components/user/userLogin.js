@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
-import { status, json } from '../utilities/requestHandlers';
-import UserContext from '../contexts/user';
+import { status, json } from '../../utilities/requestHandlers';
+import UserContext from '../../contexts/user';
 import { Redirect } from 'react-router-dom';
 
 // add some layout to keep the form organised on different screen sizes
@@ -39,7 +39,7 @@ class LoginForm extends React.Component {
         const {username, password} = values;
         console.log(`logging in user: ${username}`)
         fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users/login', {
-            method: "POST",
+          method: "POST",
             headers: {
                 "Authorization": "Basic " + btoa(username + ":" + password)
             }        
@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
             console.log(user);
             user.password = password;  // store in context for future API calls
             this.context.login(user);
-            this.setState({redirect:'/'});
+            this.setState({redirect:'/userAccount'});
         })
         .catch(error => {
             console.log('Login failed');
@@ -59,6 +59,9 @@ class LoginForm extends React.Component {
     }
     
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }  
     return (
         <Form {...formItemLayout} name="login" onFinish={this.login} scrollToFirstError >
             <Form.Item name="username" label="Username" rules={usernameRules} >

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'antd';
 import PostCard from './postcard';
-import { status, json } from '../utilities/requestHandlers';
+import { status, json } from '../../utilities/requestHandlers';
 
 class BlogGrid extends React.Component {
 
@@ -17,7 +17,8 @@ class BlogGrid extends React.Component {
     .then(status)
     .then(json)
     .then(data => {
-      this.setState({ posts: data })
+      console.log("show" + JSON.stringify(data))
+      this.setState({posts: data});
     })
     .catch(err => console.log("Error fetching listings", err));
   }

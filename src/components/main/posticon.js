@@ -3,7 +3,7 @@ import React from 'react';
 import StarOutlined from '@ant-design/icons/StarOutlined';
 import StarFilled from '@ant-design/icons/StarFilled';
 
-import { status, json } from '../utilities/requestHandlers';
+import { status, json } from '../../utilities/requestHandlers';
 
 /**
  * @typedef {"filled" | "outlined"} theme

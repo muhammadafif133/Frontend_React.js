@@ -1,6 +1,9 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
-import { status, json } from '../utilities/requestHandlers';
+import { Form, Input, Button, Typography, Space } from 'antd';
+import { status, json } from '../../utilities/requestHandlers';
+import { Link } from "react-router-dom";
+
+const {Text} = Typography;
 
 // add some layout to keep the form organised on different screen sizes
 const formItemLayout = {
@@ -88,11 +91,23 @@ class RegistrationForm extends React.Component {
         <Form.Item name="username" label="Username" rules={usernameRules} >
             <Input />
         </Form.Item>
-
+        
         <Form.Item {...tailFormItemLayout}>
+          <Space direction="vertical">
             <Button type="primary" htmlType="submit">
                 Register
             </Button>
+
+            <Text type="secondary">
+              Already have an account?
+            </Text>
+
+            <Button type="default">
+                <Link to = "/login">
+                  Log In
+                </Link>
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     );
