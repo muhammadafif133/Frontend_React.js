@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Image, Row, Col, Typography } from 'antd'
 import PostIcon from './posticon';
-import { status, json } from '../utilities/requestHandlers';
+import { status, json } from '../../utilities/requestHandlers';
 
 const { Title, Paragraph } = Typography;
 

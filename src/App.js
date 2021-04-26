@@ -7,12 +7,15 @@ import {
 } from "react-router-dom";
 import './App.css';
 
-import Nav from './components/nav';
-import Account from './components/account';
-import Register from './components/register';
-import Login from './components/login';
-import Home from './components/home';
-import Post from './components/post';
+
+import UserAccount from './components/user/userAccount';
+import UserRegister from './components/user/userRegister';
+import UserLogin from './components/user/userLogin';
+import UserUpdate from './components/user/userUpdate';
+
+import Nav from './components/main/nav';
+import Home from './components/main/home';
+import Post from './components/main/post';
 
 import UserContext from './contexts/user';
 
@@ -56,11 +59,14 @@ class App extends React.Component {
 
           <Content>
             <Switch>
-              <Route path="/account" children={<Account />} />
-              <Route path="/register" children={<Register />} />
-              <Route path="/login" children={<Login />} />
+    
+              <Route path="/userAccount" children={<UserAccount />} />
+              <Route path="/userRegister" children={<UserRegister />} />
+              <Route path="/userLogin" children={<UserLogin />} />
+              <Route path="/userUpdate" children={<UserUpdate />} />
+                
               <Route path="/post/:id" children={<Post />} />
-              <Route path="/" children={<Home />} exact />
+              <Route path="/" children={<Home />}/>
             </Switch>
           </Content>
 
