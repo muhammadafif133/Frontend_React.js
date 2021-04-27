@@ -40,9 +40,9 @@ const usernameRules = [
     { required: true, message: 'Please input your username!', whitespace: true }
 ]
 
-/**
- * Registration form component for app signup.
- */
+
+
+//Registration form class which allow user to sign up
 class RegistrationForm extends React.Component {
 
   constructor(props) {
@@ -51,7 +51,7 @@ class RegistrationForm extends React.Component {
   }
   
   onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    console.log('Read values of form: ', values);
     const { confirm, ...data } = values;  // ignore the 'confirm' value in data sent
     fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users', {
         method: "POST",
@@ -64,7 +64,7 @@ class RegistrationForm extends React.Component {
     .then(json)
     .then(data => {
         console.log(data);
-        alert("User added")
+        alert("Your account has been created")
     })
     .catch(error => {
         alert(`Error: ${JSON.stringify(error)}`);
@@ -74,7 +74,10 @@ class RegistrationForm extends React.Component {
   render() {
     return (
       <Form {...formItemLayout} name="register" onFinish={this.onFinish} scrollToFirstError >
-        
+        <div style={{ padding: '1% 20%' }}>
+              <h1> Registration Page </h1>
+        </div>
+
         <Form.Item name="email" label="E-mail" rules={emailRules} >
             <Input />
         </Form.Item>
@@ -103,7 +106,7 @@ class RegistrationForm extends React.Component {
             </Text>
 
             <Button type="default">
-                <Link to = "/login">
+                <Link to = "/userLogin">
                   Log In
                 </Link>
             </Button>

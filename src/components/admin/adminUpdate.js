@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Button, Input, Layout, Typography, Space } from 'antd';
 import { status, json } from '../../utilities/requestHandlers';
 import { Link } from "react-router-dom";
 import UserContext from '../../contexts/user';
 
+const {Text} = Typography;
 // add some layout to keep the form organised on different screen sizes
 const formItemLayout = {
   labelCol: { xs: { span: 24 }, sm: { span: 6 } },
@@ -16,15 +17,15 @@ const tailFormItemLayout = {
 // define validation rules for the form fields
 const emailRules = [
     {type: 'email', message: 'The input is not valid E-mail!'},
-    {required: true, message: 'Please input your E-mail!' }
+    {required: true, message: 'Please input user`s E-mail!' }
 ];
 
 const passwordRules = [
-    { required: true, message: 'Please input your password!' }
+      { required: true, message: 'Please input user`s password!' }
 ];
 
 const confirmRules = [
-    { required: true, message: 'Please confirm your password!' },
+    { required: true, message: 'Please confirm user`s password!' },
     // rules can include function handlers in which you can apply additional logic
     ({ getFieldValue }) => ({
         validator(rule, value) {
@@ -37,43 +38,41 @@ const confirmRules = [
 ];
 
 const firstnameRules = [
-    { required: true, message: 'Please input your first name!', whitespace: true }
+    { required: true, message: 'Please input users first name!', whitespace: true }
 ]
 
 const lastnameRules = [
-    { required: true, message: 'Please input your last name!', whitespace: true }
+    { required: true, message: 'Please input users last name!', whitespace: true }
 ]
 
 const aboutRules = [
-    { required: true, message: 'Please input your about!', whitespace: true }
+    { required: true, message: 'Please input users about!', whitespace: true }
 ];
 
+// Update Form for admin to update user's credentials
 
-
-//Update Form class which allow users to update their profile credentials
-
-class UpdateForm extends React.Component {
+class AdminUpdateForm extends React.Component {
     
     constructor(props) {
         super(props);
-        this.update = this.update.bind(this);
+        this.adminUpdate = this.adminUpdate.bind(this);
     }
     
     static contextType = UserContext;
     
-    update (values) {
-        console.log('Read values of form: ', values);
-        const {confirm, ...data} = values;
-        console.log("Show value" + JSON.stringify(data));
+    adminUpdate = (values) => {
+        console.log('Received values of form: ', values);
+        const {ID, confirm, ...data} = values;  // ignore the 'confirm' value in data sent
+
         const user = this.context.user;
-        console.log("User details", user);
+       
         let headers = new Headers();
         headers.append('Authorization', 'Basic ' + btoa(user.username + ":" + user.password));
         headers.append('Content-Type', 'application/json');
         
-        console.log("User Update Test", headers); //checking error
-
-        fetch(user.links.self, {
+        console.log(values.ID);
+        
+        fetch(`https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users/${values.ID}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers:headers
@@ -82,12 +81,10 @@ class UpdateForm extends React.Component {
             .then(json)
             .then(data => {
             console.log(data);
+            alert("User account has been updated")
 
-            alert("Your profile has been updated")
-            this.context.login(data);
-            this.setState({ redirect:'/' });
-            
-        })
+            })
+        
             .catch(error => {
             alert(`Error: ${JSON.stringify(error)}`);
         });  
@@ -97,7 +94,14 @@ class UpdateForm extends React.Component {
         
         return (
 
-            <Form {...formItemLayout} name="update" onFinish={this.update} scrollToFirstError >
+            <Form {...formItemLayout} name="adminUpdate" onFinish={this.adminUpdate} scrollToFirstError >
+                <div style={{ padding: '1% 20%' }}>
+                      <h1> Update User Account  </h1>
+                </div>
+
+                <Form.Item name="ID" label="User ID">
+                    <Input />
+                </Form.Item>
             
                 <Form.Item name="firstName" label="First Name" rules={firstnameRules}>
                     <Input />
@@ -124,11 +128,31 @@ class UpdateForm extends React.Component {
                 </Form.Item>
 
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Update</Button>
+                    <Space direction="vertical">
+                      <Text type="primary">
+                         Confirm Update?
+                      </Text>
+
+                      <Button type="primary" htmlType="submit">
+                          Update
+                      </Button>
+                      
+                      <Button type="primary">
+                          <Link to = "/">
+                            Cancel
+                          </Link>
+                      </Button>
+                      
+                      <Button type="primary">
+                          <Link to = "/userAccount">
+                            Back
+                          </Link>
+                      </Button>
+                    </Space>
                 </Form.Item>
             </Form>
         );
     };
 };
 
-export default UpdateForm;
+export default AdminUpdateForm;
