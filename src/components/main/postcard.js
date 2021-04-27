@@ -15,6 +15,8 @@ class PostCard extends React.Component {
   toggleFavourite(isSelected) {
     console.log(`toggle FAVOURITE on post ${this.props.ID}`);
     console.log(`new value ${isSelected}`);
+    
+    
   }
 
   render() {
@@ -26,10 +28,10 @@ class PostCard extends React.Component {
         hoverable={true}
         actions={[
           <PostIcon type="favourite" countLink={this.props.links.favourites} selected={this.props.favourited}
-              handleToggle={this.toggleFavourite} id={postID}/>,
+              handleToggle={this.toggleFavourite} id={postID}/>
         ]}>
         
-        <Meta dogName={this.props.dogName} description={this.props.summary} />
+        <Meta title={this.props.dogName} description={this.props.details} />
       </Card>
     );
   }

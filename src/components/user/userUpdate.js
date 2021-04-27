@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Typography, Space } from 'antd';
 import { status, json } from '../../utilities/requestHandlers';
 import { Link } from "react-router-dom";
 import UserContext from '../../contexts/user';
 
+const {Text} = Typography;
 // add some layout to keep the form organised on different screen sizes
 const formItemLayout = {
   labelCol: { xs: { span: 24 }, sm: { span: 6 } },
@@ -124,7 +125,27 @@ class UpdateForm extends React.Component {
                 </Form.Item>
 
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Update</Button>
+                    <Space direction="vertical">
+                      <Text type="primary">
+                         Confirm?
+                      </Text>
+
+                      <Button type="primary" htmlType="submit">
+                          Update
+                      </Button>
+                      
+                      <Button type="primary">
+                          <Link to = "/">
+                            Cancel
+                          </Link>
+                      </Button>
+                      
+                      <Button type="primary">
+                          <Link to = "/userAccount">
+                            Back
+                          </Link>
+                      </Button>
+                    </Space>
                 </Form.Item>
             </Form>
         );

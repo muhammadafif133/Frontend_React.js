@@ -17,6 +17,10 @@ import AdminDelete from './components/admin/adminDelete';
 import AdminUpdate from './components/admin/adminUpdate';
 
 import CreateListing from './components/dogListing/createListing';
+import UpdateListing from './components/dogListing/updateListing';
+import DeleteListing from './components/dogListing/deleteListing';
+
+
 
 import Nav from './components/main/nav';
 import Home from './components/main/home';
@@ -74,6 +78,8 @@ class App extends React.Component {
               <Route path="/adminUpdate" children={<AdminUpdate />} />
               
               <Route path="/createListing" children={<CreateListing />} />
+              <Route path="/updateListing" children={<UpdateListing />} />
+              <Route path="/deleteListing" children={<DeleteListing />} />
                 
               <Route path="/post/:id" children={<Post />} />
               <Route path="/" children={<Home />}/>
