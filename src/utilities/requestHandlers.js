@@ -7,7 +7,7 @@ export function status(response) {
       return response;
     } else {
       return new Promise((resolve, reject) => {
-        return response.json(response);
+        return response.json(response).then(resolve);
       });
     }
 }

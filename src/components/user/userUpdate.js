@@ -45,7 +45,7 @@ const lastnameRules = [
 ]
 
 const aboutRules = [
-    { required: true, message: 'Please input your phone number!', whitespace: true }
+    { required: true, message: 'Please input your about!', whitespace: true }
 ];
 
 
@@ -65,12 +65,12 @@ class UpdateForm extends React.Component {
     
     update (values) {
         console.log('Received values of form: ', values);
-        const {...data} = values;
-
+        const {confirm, ...data} = values;
+        console.log("show" + JSON.stringify(data));
         const user = this.context.user;
-       
+        console.log("user", user);
         let headers = new Headers();
-        headers.append('Authorization', 'Basic ' + btoa(user.userName + ":" + user.password));
+        headers.append('Authorization', 'Basic ' + btoa(user.username + ":" + user.password));
         headers.append('Content-Type', 'application/json');
         
         console.log("User Update Test", headers); //checking error
