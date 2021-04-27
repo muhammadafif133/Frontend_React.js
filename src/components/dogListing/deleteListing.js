@@ -17,29 +17,29 @@ const tailFormItemLayout = {
 };
 
 // define validation rules for the form fields
-const userIDRules = [
+const dogsIDRules = [
     { required: true, message: 'Please insert userID!', whitespace: true }
 ]
 
-// Delete Form for admin to delete user account 
-
-class AdminDeleteForm extends React.Component {
+// Delete listed dog form for employee
+class DeleteListingForm extends React.Component {
     
     constructor(props) {
         super(props);
-        this.adminDelete = this.adminDelete.bind(this);
+        this.deleteListing = this.deleteListing.bind(this);
     }
     
     static contextType = UserContext;
     
-    adminDelete (values) {
+    deleteListing (values) {
         
         const user = this.context.user;
         
-        let headers = new Headers();
-        headers.append('Authorization', 'Basic ' + btoa(user.username + ":" + user.password));
-                
-        fetch(`https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users/${values.ID}`, {
+         let headers = new Headers();
+         headers.append('Authorization', 'Basic ' + btoa(user.username + ":" + user.password));
+        
+        
+        fetch(`https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/listings/${values.ID}`, {
             method: "DELETE",
             headers:headers
         })
@@ -47,7 +47,7 @@ class AdminDeleteForm extends React.Component {
             .then(json)
             .then(data => {
             console.log(data);
-            alert("User account has been deleted")
+            alert("Dog has been successfully deleted")
             
             })
         
@@ -60,12 +60,12 @@ class AdminDeleteForm extends React.Component {
         
         return (
 
-            <Form {...formItemLayout} name="adminDelete" onFinish={this.adminDelete} scrollToFirstError >
+            <Form {...formItemLayout} name="deleteListing" onFinish={this.deleteListing} scrollToFirstError >
                 <div style={{ padding: '1% 30%' }}>
-                  <h1> Delete User/Employee Account </h1>
+                  <h1> Delete Dogs </h1>
                 </div>
-                <Content style={{ padding: '0.5% 25%'}}>Enter user ID number</Content>
-                <Form.Item name="ID" label="User ID" rules={userIDRules}>
+                <Content style={{ padding: '0.5% 25%'}}>Enter dogs ID number</Content>
+                <Form.Item name="ID" label="Dogs ID" rules={dogsIDRules}>
                     <Input />
                 </Form.Item>
 
@@ -97,4 +97,4 @@ class AdminDeleteForm extends React.Component {
     };
 };
 
-export default AdminDeleteForm;
+export default DeleteListingForm;

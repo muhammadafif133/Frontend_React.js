@@ -32,6 +32,7 @@ class Post extends React.Component {
 
   toggleFavourite(isSelected) {
     console.log('Favourite was toggled');
+    console.log(`new value ${isSelected}`);
   }
 
 
@@ -42,7 +43,7 @@ class Post extends React.Component {
     const post = this.state.post;
     const icons = (
       <div>
-        Favourites : <PostIcon type="likes" count={post.favourites} selected={post.favourited}
+        Favourites : <PostIcon type="favourite" count={post.favourites} selected={post.favourited}
           handleToggle={this.toggleFavourite}/><br/>
       </div>
     );

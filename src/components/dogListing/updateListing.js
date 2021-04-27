@@ -4,7 +4,7 @@ import { status, json } from '../../utilities/requestHandlers';
 import { Link } from "react-router-dom";
 import UserContext from '../../contexts/user';
 
-const {Text} = Typography;
+  const {Text} = Typography;
 // add some layout to keep the form organised on different screen sizes
 const formItemLayout = {
   labelCol: { xs: { span: 24 }, sm: { span: 6 } },
@@ -16,19 +16,19 @@ const tailFormItemLayout = {
 
 // define validation rules for the form fields
 const dogNameRules = [
-    { required: true, message: 'Please insert the dog name!', whitespace: true }
+    { required: true, message: 'Please input the dog name!', whitespace: true }
 ]
 
 const detailsRules = [
-    { required: true, message: 'Please insert the dog details!', whitespace: true }
+    { required: true, message: 'Please input the dog details!', whitespace: true }
 ]
 
 const locationRules = [
-    { required: true, message: 'Please insert the shelter location!', whitespace: true }
+    { required: true, message: 'Please input the shelter location!', whitespace: true }
 ]
 
 const breedRules = [
-    { required: true, message: 'Please insert the dog breed!', whitespace: true }
+    { required: true, message: 'Please input the dog breed!', whitespace: true }
 ]
 
 const imageURLRules = [
@@ -36,50 +36,59 @@ const imageURLRules = [
 ]
 
 
-// Create dog listing form for employees
+// Update dog details form for employee
 
-class CreateListingForm extends React.Component {
+class UpdateListingForm extends React.Component {
     
     constructor(props) {
         super(props);
-        this.createListing = this.createListing.bind(this);
+        this.updateListing = this.updateListing.bind(this);
     }
     
     static contextType = UserContext;
     
-    createListing = (values) => {
+    updateListing = (values) => {
         console.log('Received values of form: ', values);
-        const {...data } = values;
+        const {ID, ...data} = values; 
 
         const user = this.context.user;
-        console.log(user);
-        
+       
         let headers = new Headers();
         headers.append('Authorization', 'Basic ' + btoa(user.username + ":" + user.password));
         headers.append('Content-Type', 'application/json');
         
-        fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/listings', {
-            method: "POST",
+        console.log(values.ID);
+        
+        fetch(`https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/listings/${values.ID}`, {
+            method: "PUT",
             body: JSON.stringify(data),
-            headers: headers
+            headers:headers
         })
             .then(status)
             .then(json)
             .then(data => {
             console.log(data);
-            alert("Dog has been listed")
-        })
+            alert("Dog details has been updated")
+
+            })
+        
             .catch(error => {
             alert(`Error: ${JSON.stringify(error)}`);
         });  
     };
     
     render() {
+        
         return (
-            <Form {...formItemLayout} name="createListing" onFinish={this.createListing} scrollToFirstError >
+
+            <Form {...formItemLayout} name="updateListing" onFinish={this.updateListing} scrollToFirstError >
                 <div style={{ padding: '1% 20%' }}>
-                      <h1> Post New Dog </h1>
+                      <h1> Update Dog Details </h1>
                 </div>
+                
+                <Form.Item name="ID" label="Dog ID" rules={dogNameRules}>
+                    <Input />
+                </Form.Item>
 
                 <Form.Item name="dogName" label="Dog's Name" rules={dogNameRules}>
                     <Input />
@@ -108,7 +117,7 @@ class CreateListingForm extends React.Component {
                       </Text>
 
                       <Button type="primary" htmlType="submit">
-                          Post
+                          Update
                       </Button>
 
                       <Button type="default">
@@ -117,10 +126,10 @@ class CreateListingForm extends React.Component {
                           </Link>
                       </Button>
                     </Space>
-                </Form.Item>
+                </Form.Item>                
             </Form>
         );
     };
 };
 
-export default CreateListingForm;
+export default UpdateListingForm;
