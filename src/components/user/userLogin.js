@@ -64,6 +64,9 @@ class LoginForm extends React.Component {
     }  
     return (
         <Form {...formItemLayout} name="login" onFinish={this.login} scrollToFirstError >
+            <div style={{ padding: '1% 20%' }}>
+                  <h1> Login Page </h1>
+            </div>
             <Form.Item name="username" label="Username" rules={usernameRules} >
                 <Input />
             </Form.Item>

@@ -13,6 +13,11 @@ import UserRegister from './components/user/userRegister';
 import UserLogin from './components/user/userLogin';
 import UserUpdate from './components/user/userUpdate';
 
+import AdminDelete from './components/admin/adminDelete';
+import AdminUpdate from './components/admin/adminUpdate';
+
+import CreateListing from './components/dogListing/createListing';
+
 import Nav from './components/main/nav';
 import Home from './components/main/home';
 import Post from './components/main/post';
@@ -64,6 +69,11 @@ class App extends React.Component {
               <Route path="/userRegister" children={<UserRegister />} />
               <Route path="/userLogin" children={<UserLogin />} />
               <Route path="/userUpdate" children={<UserUpdate />} />
+                
+              <Route path="/adminDelete" children={<AdminDelete />} />
+              <Route path="/adminUpdate" children={<AdminUpdate />} />
+              
+              <Route path="/createListing" children={<CreateListing />} />
                 
               <Route path="/post/:id" children={<Post />} />
               <Route path="/" children={<Home />}/>

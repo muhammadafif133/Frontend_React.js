@@ -2,14 +2,13 @@ import React from 'react';
 import UserContext from '../../contexts/user';
 import {useContext} from 'react';
 
-
-function Account(props) {
+function UserAccount(props) {
   const context = useContext(UserContext);
   const user = context.user;
   console.log("current user in UserContext is", user);
 
   const [profile, setProfile] = React.useState({});
-
+  
   if (!user.loggedIn) {
     return "Please log in"
   }
@@ -35,10 +34,12 @@ function Account(props) {
 
   return (
     <>
-      <h1>Account</h1>
-      {Object.keys(profile).map(key => <li key={key}>{key}: {profile[key]}</li>)}
+      <div style={{ padding: '1% 30%' }}>
+        <h1> Profile Account</h1>
+        {Object.keys(profile).map(key => <li key={key}>{key}: {profile[key]}</li>)} 
+      </div>
     </>
   );
 }
 
-export default Account;
+export default UserAccount;
