@@ -21,11 +21,11 @@ function getIcon (theme, iconType) {
   let Icon;
 
   if (theme === 'filled') {
-    if (iconType === 'star') {
+    if (iconType === 'favourite') {
       Icon = StarFilled
     } 
   } else if (theme === 'outlined') {
-    if (iconType === 'star') {
+    if (iconType === 'favourite') {
       Icon = StarOutlined
     }       
   }

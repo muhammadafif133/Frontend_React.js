@@ -31,7 +31,7 @@ class BlogGrid extends React.Component {
       return (
         <div style={{padding:"10px"}} key={post.ID}>
           <Col span={6}>
-            <PostCard {...post} />
+           <PostCard {...post} />
           </Col>
         </div>
       )
