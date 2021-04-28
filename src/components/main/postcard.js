@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import { Card } from 'antd';
 import PostIcon from './posticon';
 import NavImage from './navimage';
@@ -31,7 +31,9 @@ class PostCard extends React.Component {
               handleToggle={this.toggleFavourite} id={postID}/>
         ]}>
         
-        <Meta title={this.props.dogName} description={this.props.details} />
+        <Meta title={this.props.dogName} description={this.props.details}  />
+        <Meta description={this.props.breeds}  />
+        <Meta description={this.props.location}  />
       </Card>
     );
   }

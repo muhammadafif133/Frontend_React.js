@@ -40,7 +40,21 @@ const usernameRules = [
     { required: true, message: 'Please input your username!', whitespace: true }
 ]
 
+const firstnameRules = [
+    { required: true, message: 'Please input your first name!', whitespace: true }
+]
 
+const lastnameRules = [
+    { required: true, message: 'Please input your last name!', whitespace: true }
+]
+
+const aboutRules = [
+    { required: true, message: 'Please input your about!', whitespace: true }
+];
+
+const codeRules = [
+    { required: false, message: 'Please input your code!', whitespace: false }
+];
 
 //Registration form class which allow user to sign up
 class RegistrationForm extends React.Component {
@@ -51,25 +65,47 @@ class RegistrationForm extends React.Component {
   }
   
   onFinish = (values) => {
-    console.log('Read values of form: ', values);
-    const { confirm, ...data } = values;  // ignore the 'confirm' value in data sent
-    fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users', {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        }
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    
+    console.log('Received code from form: ', values.code);
+    const { role } = values.code; 
+    fetch(`https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users/${values.code}/signUpCode`, {
+        method: "GET",
+        body: JSON.stringify(role),
+        headers: headers
     })
     .then(status)
     .then(json)
-    .then(data => {
-        console.log(data);
-        alert("Your account has been created")
+    .then(role => {
+        console.log(role);
+        console.log("Role added" + JSON.stringify(role))
+        console.log('Received values of form: ', values);
+        const { confirm, code, ...data } = values ;  // ignore the 'confirm' and 'data' value in data sent
+
+        let roleName = role[0].name;
+        console.log(JSON.stringify(roleName));
+        data.role = roleName;
+        console.log("data" + JSON.stringify(data));
+              
+        fetch('https://pilot-energy-3000.codio-box.uk/canine_shelter/v1/users', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: headers
+        })
+        .then(status)
+        .then(json)
+        .then(data => {
+            console.log(data);
+            alert("Your account has been created")
+        })
+        .catch(error => {
+            alert(`Error: ${JSON.stringify(error)}`);
+        });  
     })
-    .catch(error => {
-        alert(`Error: ${JSON.stringify(error)}`);
-    });  
   };
+    
   
   render() {
     return (
@@ -77,6 +113,22 @@ class RegistrationForm extends React.Component {
         <div style={{ padding: '1% 20%' }}>
               <h1> Registration Page </h1>
         </div>
+
+        <Form.Item name="firstName" label="First Name" rules={firstnameRules}>
+            <Input />
+        </Form.Item>
+
+        <Form.Item name="lastName" label="Last Name" rules={lastnameRules}>
+            <Input />
+        </Form.Item>
+
+        <Form.Item name="about" label="About" rules={aboutRules}>
+            <Input />
+        </Form.Item>
+
+        <Form.Item name="username" label="Username" rules={usernameRules} >
+            <Input />
+        </Form.Item>
 
         <Form.Item name="email" label="E-mail" rules={emailRules} >
             <Input />
@@ -91,7 +143,7 @@ class RegistrationForm extends React.Component {
             <Input.Password />
         </Form.Item>
 
-        <Form.Item name="username" label="Username" rules={usernameRules} >
+        <Form.Item name="code" label="Sign Up Code" rules={codeRules}>
             <Input />
         </Form.Item>
         

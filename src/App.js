@@ -20,8 +20,6 @@ import CreateListing from './components/dogListing/createListing';
 import UpdateListing from './components/dogListing/updateListing';
 import DeleteListing from './components/dogListing/deleteListing';
 
-
-
 import Nav from './components/main/nav';
 import Home from './components/main/home';
 import Post from './components/main/post';
@@ -86,7 +84,7 @@ class App extends React.Component {
             </Switch>
           </Content>
 
-          <Footer style={{ textAlign: 'center' }}>Created for Web API Development</Footer>
+          <Footer style={{ textAlign: 'center' }}>Created for Canine Dogs Shelter</Footer>
 
         </Router>
       </UserContext.Provider>  
