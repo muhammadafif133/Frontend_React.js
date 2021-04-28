@@ -24,10 +24,10 @@ class BlogGrid extends React.Component {
   }
 
   render() {
-    if (!this.state.posts.length) {
-      return <h3>Loading posts...</h3>
+    if (!this.props.dogList.length) {
+      return <h3>Loading bloggrid...</h3>
     }
-    const cardList = this.state.posts.map(post => {
+    const cardList = this.props.dogList.map(post => {
       return (
         <div style={{padding:"10px"}} key={post.ID}>
           <Col span={6}>
