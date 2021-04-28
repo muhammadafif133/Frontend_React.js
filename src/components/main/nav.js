@@ -8,7 +8,8 @@ import UserContext from '../../contexts/user';
 import { HomeOutlined, UserAddOutlined, UserOutlined, 
     LogoutOutlined, IdcardOutlined, SettingOutlined, 
     ShopOutlined, UserDeleteOutlined, EditOutlined,
-    StarOutlined, PlusSquareOutlined, DeleteOutlined} from '@ant-design/icons';
+    StarOutlined, PlusSquareOutlined, DeleteOutlined,
+       UsergroupAddOutlined} from '@ant-design/icons';
 
 const {SubMenu} = Menu;
 
@@ -78,6 +79,8 @@ function Nav(props) {
             <Menu.ItemGroup title = "Activity">
             <Menu.Item key="useraccount: 1" icon = {<UserDeleteOutlined />}><Link to="/adminDelete"> Delete User Account </Link></Menu.Item>
             <Menu.Item key="useraccount: 2" icon = {<EditOutlined />}><Link to="/adminUpdate"> Update User Account </Link></Menu.Item>
+            <Menu.Item key="useraccount: 3" icon = {<UsergroupAddOutlined />}><Link to="/adminGetAllUser"> Show All Users </Link></Menu.Item>
+
             </Menu.ItemGroup>
         </SubMenu>
 

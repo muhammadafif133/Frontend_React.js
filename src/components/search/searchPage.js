@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './searchBar';
-import DogList from './dogList';
 import BlogGrid from '../main/bloggrid';
 
 import { PageHeader } from 'antd';

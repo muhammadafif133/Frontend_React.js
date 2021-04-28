@@ -7,19 +7,24 @@ import {
 } from "react-router-dom";
 import './App.css';
 
-
+// User management
 import UserAccount from './components/user/userAccount';
 import UserRegister from './components/user/userRegister';
 import UserLogin from './components/user/userLogin';
 import UserUpdate from './components/user/userUpdate';
 
+// Admin management
 import AdminDelete from './components/admin/adminDelete';
 import AdminUpdate from './components/admin/adminUpdate';
+import AdminGetAllUser from './components/admin/adminGetAllUser';
+import UserPost from './components/admin/userPost';
 
+// Dog Listing management
 import CreateListing from './components/dogListing/createListing';
 import UpdateListing from './components/dogListing/updateListing';
 import DeleteListing from './components/dogListing/deleteListing';
 
+// Main web management
 import Nav from './components/main/nav';
 import Home from './components/main/home';
 import Post from './components/main/post';
@@ -74,7 +79,10 @@ class App extends React.Component {
                 
               <Route path="/adminDelete" children={<AdminDelete />} />
               <Route path="/adminUpdate" children={<AdminUpdate />} />
-              
+              <Route path="/adminGetAllUser" children={<AdminGetAllUser />} />
+              <Route path="/userPost" children={<UserPost />} />
+                
+                
               <Route path="/createListing" children={<CreateListing />} />
               <Route path="/updateListing" children={<UpdateListing />} />
               <Route path="/deleteListing" children={<DeleteListing />} />
