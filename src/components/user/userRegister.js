@@ -142,6 +142,13 @@ class RegistrationForm extends React.Component {
             hasFeedback rules={confirmRules}>
             <Input.Password />
         </Form.Item>
+        
+        <div style={{ padding: '1% 25%' }}>
+          <Text type="secondary">
+            Input code 30 for user registration
+          </Text>
+        </div>
+
 
         <Form.Item name="code" label="Sign Up Code" rules={codeRules}>
             <Input />

@@ -38,7 +38,7 @@ const SearchPage = (props) => {
           
            <PageHeader className="site-page-header"
             title="Canine Dogs Shelter"
-            subTitle="Where are dogs are preserved"/>
+            subTitle="Where dogs are preserved"/>
       
       <BlogGrid dogList = {dogList?dogList:[]} />    
     </>

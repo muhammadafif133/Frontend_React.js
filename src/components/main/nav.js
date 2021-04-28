@@ -86,7 +86,7 @@ function Nav(props) {
 
          <SubMenu key = "7" icon = <ShopOutlined /> title = "Canine Dogs Shelter">
             <Menu.ItemGroup title = "Activity">
-                <Menu.Item key="12" icon = {<DeleteOutlined />}><Link to = "/deleteDog"> Delete Dog </Link></Menu.Item>
+                <Menu.Item key="12" icon = {<DeleteOutlined />}><Link to = "/deleteListing"> Delete Dog </Link></Menu.Item>
             </Menu.ItemGroup>
         </SubMenu>
         </>    

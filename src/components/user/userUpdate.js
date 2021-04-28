@@ -135,7 +135,7 @@ class UpdateForm extends React.Component {
                       </Button>
                       
                       <Button type="primary">
-                          <Link to = "/">
+                          <Link to = "/home">
                             Cancel
                           </Link>
                       </Button>
